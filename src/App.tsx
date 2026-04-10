@@ -1,0 +1,74 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Footer from "./components/footer/Footer"
+import Navbar from "./components/navbar/Navbar"
+import Home from "./pages/home/Home"
+import Cadastro from "./pages/cadastro/Cadastro"
+import Login from "./pages/login/Login"
+import { AuthProvider } from "./contexts/AuthContext"
+import DeletarTema from "./components/tema/deletartema/DeletarTema"
+import FormTema from "./components/tema/formtema/FormTema"
+import ListaTemas from "./components/tema/listatemas/ListaTemas"
+import FormPostagem from "./components/postagem/formpostagem/FormPostagem"
+import DeletarPostagem from "./components/postagem/deletarpostagem/DeletarPostagem"
+import Perfil from "./pages/perfil/Perfil"
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
+import AtualizarPerfil from "./pages/perfil/AtualizarPerfil"
+import Postagens from "./pages/postagens/Postagens"
+
+function App() {
+
+  return (
+    <>
+      <AuthProvider>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar
+          theme="dark"
+          toastStyle={{
+            backgroundColor: "#13101E",
+            border: "1px solid rgba(255,255,255,0.08)",
+            color: "#E8EAF0",
+            boxShadow: "0 0 10px rgba(196,132,154,0.15)"
+          }}
+        />
+
+        <BrowserRouter>
+          <div
+            className="min-h-screen flex flex-col"
+            style={{
+              backgroundColor: "#13101E",
+              color: "#E8EAF0"
+            }}
+          >
+            <Navbar />
+
+            <div className="flex-1 w-full">
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/temas" element={<ListaTemas />} />
+                <Route path="/cadastrartema" element={<FormTema />} />
+                <Route path="/editartema/:id" element={<FormTema />} />
+                <Route path="/deletartema/:id" element={<DeletarTema />} />
+                <Route path="/postagens" element={<Postagens />} />
+                <Route path="/cadastrarpostagem" element={<FormPostagem />} />
+                <Route path="/editarpostagem/:id" element={<FormPostagem />} />
+                <Route path="/deletarpostagem/:id" element={<DeletarPostagem />} />
+                <Route path="/perfil" element={<Perfil />} />
+                <Route path="/atualizarusuario" element={<AtualizarPerfil />} />
+              </Routes>
+            </div>
+
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </AuthProvider>
+    </>
+  )
+}
+
+export default App
